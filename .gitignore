@@ -1,10 +1,23 @@
+# Ignore heavy data directories
 data/raw/
 data/interim/
 data/processed/
+
+# Ignore all logs except ingest template
 logs/*
 !logs/ingest/
 !logs/ingest/TEMPLATE.json
+
+# Ignore large binary data formats
 *.parq
 *.scid
 *.depth
 *-TRUE_SYNC*
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Temporary/OS files
+.DS_Store
+Thumbs.db
