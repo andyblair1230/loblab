@@ -1,0 +1,8 @@
+# Will change these
+level_survival_ms: 500
+move_horizons_s: [1, 5, 60]     # short, mid, long
+move_target: trade_price        # predict move in traded price
+barrier:
+  upper_mult: 1.0
+  lower_mult: 1.0
+  max_horizon_s: 60

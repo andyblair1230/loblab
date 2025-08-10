@@ -1,0 +1,5 @@
+project: loblab
+tz: UTC
+timestamp_unit: us
+data_root: ${LOBLAB_DATA}   # set earlier to C:\loblab\data
+symbols: [ES]

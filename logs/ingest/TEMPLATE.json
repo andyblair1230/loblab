@@ -1,0 +1,32 @@
+{
+  "symbol": "",
+  "contract_id": "",
+  "date": "",
+
+  "utc_window": { "start": "", "end": "" },
+
+  "files": {
+    "scid":               { "path": "", "sha256": "", "rows": 0, "t_min": 0, "t_max": 0 },
+    "scid_true_sync":     { "path": "", "sha256": "", "rows": 0, "t_min": 0, "t_max": 0 },
+
+    "depth":              { "path": "", "sha256": "", "rows": 0, "t_min": 0, "t_max": 0 },
+    "depth_true_sync":    { "path": "", "sha256": "", "rows": 0, "t_min": 0, "t_max": 0 }
+  },
+
+  "lattice": { "min_price": 0.0, "max_price": 0.0, "headroom_ticks": 1000 },
+
+  "counts": {
+    "trades_matched": 0,
+    "events_total": 0,
+    "snapshots": 0
+  },
+
+  "flags": {
+    "is_rth": false,
+    "is_eth": false,
+    "is_preopen": false,
+    "is_maintenance_break": false
+  },
+
+  "notes": ""
+}

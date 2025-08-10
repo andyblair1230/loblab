@@ -1,0 +1,7 @@
+ES:
+  exchange: CME
+  tick_size: 0.25
+  point_value: 50        # USD per index point
+  tick_value: 12.5       # USD per tick
+  price_decimals: 2
+  venue: GLOBEX

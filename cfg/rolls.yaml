@@ -1,0 +1,4 @@
+ES:
+  rule: "front_until_back_has_more_volume"
+  checks: "daily"
+  roll_events: []   # later: list of {date: YYYY-MM-DD, from: ESU2025, to: ESZ2025}

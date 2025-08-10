@@ -1,0 +1,8 @@
+absolute_lattice:
+  min_price: 0.00
+  headroom_ticks_above_session_high: 1000
+  clamp_to_session: true
+
+active_window:
+  around_touch_ticks: 200
+  include_nonzero_outside_window: true

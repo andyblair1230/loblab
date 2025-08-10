@@ -1,7 +1,9 @@
 data/raw/
 data/interim/
 data/processed/
-logs/
+logs/*
+!logs/ingest/
+!logs/ingest/TEMPLATE.json
 *.parq
 *.scid
 *.depth

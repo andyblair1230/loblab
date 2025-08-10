@@ -1,0 +1,28 @@
+tz_local: America/New_York
+
+ES:
+  RTH:
+    days: [Mon, Tue, Wed, Thu, Fri]
+    start_local: "09:30:00"
+    end_local:   "16:00:00"
+
+  ETH:
+    # Trading runs from Sun 18:00 ET through Fri 17:00 ET, with a daily maintenance break.
+    open_days:  [Sun, Mon, Tue, Wed, Thu]
+    open_time_local:  "18:00:00"          # Globex open
+    close_days: [Mon, Tue, Wed, Thu, Fri]
+    close_time_local: "17:00:00"          # Daily close before maintenance break
+
+    maintenance_break:
+      start_local: "17:00:00"
+      end_local:   "18:00:00"
+      days: [Mon, Tue, Wed, Thu]
+
+    pre_open:
+      start_local: "17:45:00"             # order entry only
+      end_local:   "18:00:00"
+      days: [Sun, Mon, Tue, Wed, Thu]
+
+    weekend_policy:
+      sat_closed: true
+      fri_after_close_until_sun_preopen_closed: true
