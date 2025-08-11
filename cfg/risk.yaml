@@ -1,0 +1,11 @@
+# cfg/risk.yaml
+# Placeholder risk configuration — values are set dynamically by the model
+# during live trading. Nothing here is enforced unless explicitly enabled.
+
+risk:
+  enabled: false          # true to enforce, false to ignore
+  daily_loss_limit_pct: null     # % of account balance (e.g., 2.0)
+  trade_loss_limit_ticks: null   # ticks per trade (e.g., 8)
+  max_concurrent_orders: null    # max open orders (e.g., 3)
+  max_position_size: null        # contracts, can vary per instrument
+  close_on_latency_breach: false # whether to exit all on latency p99 breach
