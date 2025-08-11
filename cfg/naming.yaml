@@ -1,23 +1,23 @@
-# How filenames look on disk (Sierra Chart convention)
-# contract_id = {symbol}{month_code}{yy}, e.g., ESU25
+# Sierra Chart filenames include a venue tag after the contract_id.
+# Examples:
+#   ESU25_FUT_CME.scid
+#   ESU25_FUT_CME-TRUE_SYNC.scid
+#   ESU25_FUT_CME.2025-08-11.depth
+#   ESU25_FUT_CME-TRUE_SYNC.2025-08-11.depth
+
+vars:
+  venue_tag: "FUT_CME"        # change here if Sierra uses something else
+  # contract_id = {symbol}{month_code}{yy}, e.g., ESU25
+  # file_stub   = {contract_id}_{venue_tag}, e.g., ESU25_FUT_CME
+
 patterns:
-  scid:              "{contract_id}.scid"
-  scid_true_sync:    "{contract_id}-TRUE_SYNC.scid"
+  scid:              "{file_stub}.scid"
+  scid_true_sync:    "{file_stub}-TRUE_SYNC.scid"
 
-  depth:             "{contract_id}.{date}.depth"            # date = YYYY-MM-DD
-  depth_true_sync:   "{contract_id}-TRUE_SYNC.{date}.depth"
+  depth:             "{file_stub}.{date}.depth"            # date = YYYY-MM-DD
+  depth_true_sync:   "{file_stub}-TRUE_SYNC.{date}.depth"
 
-# Where files live in your repo
-# We keep SCID and daily depth together under the contract folder.
-# Sessions (RTH/ETH) are derived from timestamps later, not from filenames.
 layout:
   raw:        "{root}/raw/{symbol}/{yyyy}/{contract_id}/"
   interim:    "{root}/interim/{symbol}/{yyyy}/{contract_id}/"
   processed:  "{root}/processed/{symbol}/{yyyy}/{contract_id}/"
-
-# Variables we’ll substitute (documented here for clarity)
-# symbol: ES
-# month_code: one-letter CME month code (F,G,H,J,K,M,N,Q,U,V,X,Z)
-# yy / yyyy: two-digit / four-digit year
-# date: trading date in YYYY-MM-DD
-# contract_id: "{symbol}{month_code}{yy}"
