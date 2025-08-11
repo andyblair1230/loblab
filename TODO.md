@@ -8,15 +8,17 @@
 - [ ] Add blank CSV headers:
     - `feed_latency.csv`
     - `orders_latency.csv`
+    - `sync_latency.csv`          # write + fsync timings
 - [ ] Verify NTP sync offset < 5 ms
 
-## Latency Measurement Pass
-- [ ] Run quiet ETH slice feed logging + 50 micro-orders
-- [ ] Run busy RTH slice feed logging + 50 micro-orders
-- [ ] Collect and save CSVs for both slices
-- [ ] Generate p50/p90/p95/p99 for each latency leg
-- [ ] Determine execution horizon bucket (nearest to p95 end-to-end)
-- [ ] Save summaries to `logs/latency/YYYY-MM-DD/summary_RTH.json` and `_ETH.json`
+## Latency Measurement Pass (minimal, pre-model)
+- [ ] Run quiet ETH slice feed logging
+- [ ] Run busy RTH slice feed logging
+- [ ] Collect CSVs for both slices
+- [ ] Compute p50/p90/p95/p99 for:
+      data, parse, state, **sync write**, **fsync**, pipeline, pipeline+sync
+- [ ] Record snapshot stats (every ~10m), batches per ms, reorder rate
+- [ ] Pick provisional execution bucket (until order-path timing is added)
 
 ## Intake Step (Step 3)
 - [ ] Finalize absolute price lattice bounds per session from raw data
@@ -32,21 +34,32 @@
     - same_ms_batch_index
 - [ ] Time snapshot rebuild separately on COMMAND_CLEAR_BOOK
 - [ ] Apply correct order inside batch: bids desc, then asks asc
-- [ ] Trade stream verification as parallel check (not in hot path)
+- [ ] Trade stream verification as parallel check (off the hot path, capped)
 - [ ] Log reorder flags if sort performed
 - [ ] Track gap handling events and resync timing
 - [ ] Implement continuous real-time TRUE_SYNC generator:
     - Reads raw depth + SCID in real time
     - Applies batch ordering, snapshot rebuilds, and trade sequence matching
-    - Outputs updated TRUE_SYNC SCID + depth files with precise sequence ordering
+    - Outputs updated TRUE_SYNC SCID + depth with precise sequence ordering
     - Logs processing latency per batch for latency budget analysis
+    - **Logs sync latency**: write_start/end, fsync_start/end, rotate_start/end
 
 ## Modeling Prep
-- [ ] Build minimal event-stream parser using `cfg/naming.yaml` patterns
+- [ ] Build minimal event-stream parser using `cfg/naming.yaml`
 - [ ] Integrate session cuts from `cfg/sessions.yaml`
 - [ ] Create feature extraction stubs (features computed from live TRUE_SYNC outputs)
 - [ ] Link near-term forecast horizon to `cfg/latency.yaml` bucket
 - [ ] Draft longer-term forecast heads (alpha horizon)
+
+## Execution Buckets (multi-horizon)
+- [ ] Implement multi-horizon prediction framework
+    - Horizons: **250 ms, 500 ms, 750 ms, 1000 ms**
+    - Output forecasts for each horizon per incoming update
+    - Simulate fill price at each horizon using reconstructed book state
+    - Track PnL, hit rate, and slippage **per horizon**
+    - Backtest across horizons to find optimal execution window by regime
+    - In live mode, select the horizon closest to measured end-to-end latency
+    - Log chosen horizon for every decision for later replays
 
 ## Risk & Control
 - [ ] Create `cfg/risk.yaml` with daily_loss_limit_pct, trade_loss_limit_ticks, max_concurrent_orders
