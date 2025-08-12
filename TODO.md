@@ -52,7 +52,7 @@
 - [ ] Draft longer-term forecast heads (alpha horizon)
 
 ## Execution Buckets (multi-horizon)
-- [ ] Implement multi-horizon prediction framework
+- [ ] Implement multi-horizon **execution-time prediction** framework (near-term fills):
     - Horizons: **250 ms, 500 ms, 750 ms, 1000 ms**
     - Output forecasts for each horizon per incoming update
     - Simulate fill price at each horizon using reconstructed book state
@@ -60,9 +60,15 @@
     - Backtest across horizons to find optimal execution window by regime
     - In live mode, select the horizon closest to measured end-to-end latency
     - Log chosen horizon for every decision for later replays
+- [ ] Implement **strategy-time prediction** (model decides):
+    - Price target
+    - Trade duration (minutes to days)
+    - Action type (add, trim, reverse)
+    - Instruments to trade
+    - Risk parameters
 
 ## Risk & Control (placeholders only; model decides at runtime)
-- [ ] Add `cfg/risk.yaml` placeholders (no enforcement by default)
+- [ ] Add `cfg/risk.yaml` placeholders (no enforcement by default — all values set dynamically at runtime by the model)
 - [ ] Add `cfg/portfolio.yaml` placeholders (instrument universe, weights by model)
 - [ ] Add `cfg/execution.yaml` placeholders (order type prefs, throttle rules)
 - [ ] Add `cfg/costs.yaml` placeholders (commissions/fees for backtests)
