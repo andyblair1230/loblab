@@ -61,8 +61,11 @@
     - In live mode, select the horizon closest to measured end-to-end latency
     - Log chosen horizon for every decision for later replays
 
-## Risk & Control
-- [ ] Create `cfg/risk.yaml` with daily_loss_limit_pct, trade_loss_limit_ticks, max_concurrent_orders
+## Risk & Control (placeholders only; model decides at runtime)
+- [ ] Add `cfg/risk.yaml` placeholders (no enforcement by default)
+- [ ] Add `cfg/portfolio.yaml` placeholders (instrument universe, weights by model)
+- [ ] Add `cfg/execution.yaml` placeholders (order type prefs, throttle rules)
+- [ ] Add `cfg/costs.yaml` placeholders (commissions/fees for backtests)
 - [ ] Wire risk kill-switch to latency p99 breach from `cfg/latency.yaml`
 
 ---
