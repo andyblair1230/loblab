@@ -1,0 +1,6 @@
+costs:
+  commission_per_contract: null   # USD, set later or per-broker
+  exchange_fees_per_contract: null
+  clearing_fees_per_contract: null
+  borrow_fee_bps: 0               # mostly irrelevant for futures
+  tick_value_override: null       # falls back to instruments.yaml if null

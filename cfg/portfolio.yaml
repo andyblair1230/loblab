@@ -1,0 +1,8 @@
+portfolio:
+  enabled: false            # model decides when to trade multiple instruments
+  universe:                 # placeholder; model can emit a dynamic list
+    - ES
+  weight_scheme: model      # model outputs target weights per instrument
+  max_gross_leverage: null  # model may cap dynamically
+  max_weight_per_symbol: null
+  rebalance_policy: model   # model decides when/if to rebalance
