@@ -21,3 +21,8 @@ __pycache__/
 # Temporary/OS files
 .DS_Store
 Thumbs.db
+
+.venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/

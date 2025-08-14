@@ -1,0 +1,43 @@
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+include = '\.pyi?$'
+exclude = '''
+/(
+  \.venv
+ |data
+ |logs
+ |build
+ |dist
+ |\.git
+ |\.mypy_cache
+ |\.ruff_cache
+)/
+'''
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["data", "logs", ".venv", "build", "dist"]
+# Where your code will live; adjust later if needed
+src = ["pipeline"]
+
+[tool.ruff.lint]
+# Core rules: pyflakes/pycodestyle/imports + helpful extras
+select = ["E", "F", "I", "B", "UP", "SIM"]
+ignore = []
+fixable = ["ALL"]
+
+[tool.ruff.format]
+# We’re using Black for formatting; keep Ruff’s formatter off in pre-commit
+quote-style = "preserve"
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+warn_return_any = true
+warn_unused_ignores = true
+no_implicit_optional = true
+pretty = true
+exclude = "(^data/|^logs/|^\\.venv/|^build/|^dist/)"
+# Loosen at first; we can tighten (disallow_untyped_defs, etc.) later
