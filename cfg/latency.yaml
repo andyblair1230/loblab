@@ -1,0 +1,42 @@
+# All times in milliseconds unless stated otherwise
+timebase:
+  exchange_tz: UTC
+  local_clock: monotonic  # use monotonic for local spans
+  ntp_required: true
+  ntp_max_offset_ms: 5
+
+horizons_ms:
+  # Pretrained near-term forecast buckets you’ll target
+  buckets: [25, 50, 75, 100, 150, 250]
+  default_execution_horizon_ms: 75   # until you measure real p95
+
+budget:
+  # Alert/kill thresholds on rolling 10-minute windows
+  window_minutes: 10
+  targets:
+    data_p95_max: 25
+    parse_p95_max: 10
+    state_p95_max: 5
+    decide_p95_max: 3
+    send_p95_max: 5       # order send -> broker ack
+    post_p95_max: 20      # broker ack -> visible in book
+  end_to_end:
+    p95_max: 75           # sum target for near-term head
+    p99_max: 120          # above this, stop sending new orders
+
+actions:
+  on_p95_exceeds_bucket:
+    action: widen_horizon_to_next_bucket  # e.g., 50 -> 75 ms
+  on_p99_exceeds_limit:
+    action: halt_trading
+    cooldown_minutes: 15
+  on_ntp_offset_exceeds_ms: 10
+
+logging:
+  file_roll_minutes: 60
+  include_histograms: true
+  percentiles: [50, 90, 95, 99]
+
+tags:
+  venue: CME_GLOBEX
+  instrument: ES

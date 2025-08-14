@@ -1,23 +1,19 @@
-# Sierra Chart filenames include a venue tag after the contract_id.
-# Examples:
-#   ESU25_FUT_CME.scid
-#   ESU25_FUT_CME-TRUE_SYNC.scid
-#   ESU25_FUT_CME.2025-08-11.depth
-#   ESU25_FUT_CME-TRUE_SYNC.2025-08-11.depth
-
 vars:
-  venue_tag: "FUT_CME"        # change here if Sierra uses something else
+  venue_tag: "FUT_CME"          # your screenshot shows this
   # contract_id = {symbol}{month_code}{yy}, e.g., ESU25
   # file_stub   = {contract_id}_{venue_tag}, e.g., ESU25_FUT_CME
 
 patterns:
-  scid:              "{file_stub}.scid"
-  scid_true_sync:    "{file_stub}-TRUE_SYNC.scid"
+  scid:               "{file_stub}.scid"
+  scid_true_sync:     "{file_stub}-TRUE_SYNC.scid"
 
-  depth:             "{file_stub}.{date}.depth"            # date = YYYY-MM-DD
-  depth_true_sync:   "{file_stub}-TRUE_SYNC.{date}.depth"
+  depth:              "{file_stub}.{date}.depth"           # date = YYYY-MM-DD
+  depth_true_sync:    "{file_stub}-TRUE_SYNC.{date}.depth"
 
 layout:
-  raw:        "{root}/raw/{symbol}/{yyyy}/{contract_id}/"
-  interim:    "{root}/interim/{symbol}/{yyyy}/{contract_id}/"
-  processed:  "{root}/processed/{symbol}/{yyyy}/{contract_id}/"
+  raw_scid:        "{root}/raw/{symbol}/{yyyy}/{contract_id}/scid/"
+  raw_depth:       "{root}/raw/{symbol}/{yyyy}/{contract_id}/depth/"
+  interim_scid:    "{root}/interim/{symbol}/{yyyy}/{contract_id}/scid/"
+  interim_depth:   "{root}/interim/{symbol}/{yyyy}/{contract_id}/depth/"
+  processed_feat:  "{root}/processed/{symbol}/{yyyy}/{contract_id}/features/"
+  processed_tens:  "{root}/processed/{symbol}/{yyyy}/{contract_id}/tensors/"
